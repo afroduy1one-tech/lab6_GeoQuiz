@@ -25,6 +25,7 @@ import androidx.compose.material3.Button
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
@@ -61,6 +62,7 @@ val questions = listOf(
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     var currentQuestionIndex by remember { mutableIntStateOf(0) }
+    var answered by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -82,18 +84,26 @@ fun Greeting(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(24.dp)
         )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Button(onClick = {}) {
-                Text("TRUE")
-            }
 
-            Button(onClick = {}) {
-                Text("FALSE")
+        if (!answered) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(onClick = {
+                    answered = true
+                }) {
+                    Text("TRUE")
+                }
+
+                Button(onClick = {
+                    answered = true
+                }) {
+                    Text("FALSE")
+                }
             }
         }
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
@@ -102,6 +112,7 @@ fun Greeting(modifier: Modifier = Modifier) {
                 onClick = {
                     if (currentQuestionIndex < questions.lastIndex) {
                         currentQuestionIndex++
+                        answered = false
                     }
                 }
             ) {
