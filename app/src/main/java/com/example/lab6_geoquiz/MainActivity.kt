@@ -94,6 +94,20 @@ fun Greeting(modifier: Modifier = Modifier) {
                 Text("FALSE")
             }
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                onClick = {
+                    if (currentQuestionIndex < questions.lastIndex) {
+                        currentQuestionIndex++
+                    }
+                }
+            ) {
+                Text("NEXT")
+            }
+        }
     }
 }
 
