@@ -63,6 +63,7 @@ val questions = listOf(
 fun Greeting(modifier: Modifier = Modifier) {
     var currentQuestionIndex by remember { mutableIntStateOf(0) }
     var answered by remember { mutableStateOf(false) }
+    var correctAnswers by remember { mutableIntStateOf(0) }
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -91,12 +92,18 @@ fun Greeting(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Button(onClick = {
+                    if (questions[currentQuestionIndex].correctAnswer) {
+                        correctAnswers++
+                    }
                     answered = true
                 }) {
                     Text("TRUE")
                 }
 
                 Button(onClick = {
+                    if (!questions[currentQuestionIndex].correctAnswer) {
+                        correctAnswers++
+                    }
                     answered = true
                 }) {
                     Text("FALSE")
