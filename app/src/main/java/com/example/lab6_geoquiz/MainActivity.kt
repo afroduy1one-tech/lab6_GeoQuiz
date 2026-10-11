@@ -40,6 +40,20 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+data class QuizQuestion(
+    val text: String,
+    val correctAnswer: Boolean
+)
+
+val questions = listOf(
+    QuizQuestion("Canberra is the capital of Australia.", true),
+    QuizQuestion("The Pacific Ocean is larger than the Atlantic Ocean.", true),
+    QuizQuestion("The Suez Canal connects the Red Sea and the Indian Ocean.", false),
+    QuizQuestion("The source of the Nile River is in Egypt.", false),
+    QuizQuestion("The Amazon River is the longest river in the Americas.", true),
+    QuizQuestion("Lake Baikal is the world's oldest and deepest freshwater lake.", true)
+)
+
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     Column(
