@@ -23,6 +23,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +60,8 @@ val questions = listOf(
 
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
+    var currentQuestionIndex by remember { mutableIntStateOf(0) }
+
     Column(
         modifier = modifier.fillMaxSize()
     ) {
@@ -71,7 +77,7 @@ fun Greeting(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = "Canberra is the capital of Australia.",
+            text = questions[currentQuestionIndex].text,
             fontSize = 22.sp,
             modifier = Modifier.padding(24.dp)
         )
