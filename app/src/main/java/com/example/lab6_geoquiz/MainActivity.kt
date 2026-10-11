@@ -17,8 +17,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Button
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
@@ -39,7 +42,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier = modifier.fillMaxSize()
+    ) {
         Text(
             text = "GeoQuiz",
             fontSize = 24.sp,
@@ -50,6 +55,25 @@ fun Greeting(modifier: Modifier = Modifier) {
                 .background(Color(0xFF6200EE))
                 .padding(16.dp)
         )
+
+        Text(
+            text = "Canberra is the capital of Australia.",
+            fontSize = 22.sp,
+            modifier = Modifier.padding(24.dp)
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(onClick = {}) {
+                Text("TRUE")
+            }
+
+            Button(onClick = {}) {
+                Text("FALSE")
+            }
+        }
     }
 }
 
