@@ -28,6 +28,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +66,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     var currentQuestionIndex by remember { mutableIntStateOf(0) }
     var answered by remember { mutableStateOf(false) }
     var correctAnswers by remember { mutableIntStateOf(0) }
+    var showResult by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -96,6 +99,9 @@ fun Greeting(modifier: Modifier = Modifier) {
                         correctAnswers++
                     }
                     answered = true
+                    if (currentQuestionIndex == questions.lastIndex) {
+                        showResult = true
+                    }
                 }) {
                     Text("TRUE")
                 }
@@ -105,6 +111,9 @@ fun Greeting(modifier: Modifier = Modifier) {
                         correctAnswers++
                     }
                     answered = true
+                    if (currentQuestionIndex == questions.lastIndex) {
+                        showResult = true
+                    }
                 }) {
                     Text("FALSE")
                 }
@@ -126,6 +135,29 @@ fun Greeting(modifier: Modifier = Modifier) {
                 Text("NEXT")
             }
         }
+    }
+    if (showResult) {
+        AlertDialog(
+            onDismissRequest = {},
+            title = {
+                Text("Результат викторины")
+            },
+            text = {
+                Text("Правильных ответов: $correctAnswers из ${questions.size}")
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        currentQuestionIndex = 0
+                        correctAnswers = 0
+                        answered = false
+                        showResult = false
+                    }
+                ) {
+                    Text("Начать заново")
+                }
+            }
+        )
     }
 }
 
